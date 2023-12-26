@@ -1,0 +1,12 @@
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\bin\Debug\net7.0\Engine.deps.json
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\bin\Debug\net7.0\Engine.dll
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\bin\Debug\net7.0\Engine.pdb
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.csproj.AssemblyReference.cache
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.AssemblyInfoInputs.cache
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.AssemblyInfo.cs
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.csproj.CoreCompileInputs.cache
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.dll
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\refint\Engine.dll
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\Engine.pdb
+C:\Users\DesMo\OneDrive\Рабочий стол\Новая папка\Engine\Engine\obj\Debug\net7.0\ref\Engine.dll
