@@ -19,10 +19,10 @@ public abstract class Object
 
     public void Rotate(float angle, Axis axis)
     {
-        Basis.Rotate(angle , axis);
+        Basis.Rotate(angle, axis);
 
         for (var i = 0; i < LocalVertices.Length; i++)
-            GlobalVertices[i] = Basis.ToGlobalCoords(LocalVertices[i]);
+            GlobalVertices[i] = Basis.ToGlobalBasis(LocalVertices[i]);
     }
 
     public void Scale(float k)
@@ -31,6 +31,6 @@ public abstract class Object
             LocalVertices[i] *= k;
 
         for (var i = 0; i < LocalVertices.Length; i++)
-            GlobalVertices[i] = Basis.ToGlobalCoords(LocalVertices[i]);
+            GlobalVertices[i] = Basis.ToGlobalBasis(LocalVertices[i]);
     }
 }

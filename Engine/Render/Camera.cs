@@ -25,7 +25,7 @@ public class Camera
     
     public Vector3 ScreenProjection(Vector3 vector)
     {
-        var vectorInCameraBasis = Basis.ToLocalCoords(vector);
+        var vectorInCameraBasis = Basis.ToLocalBasis(vector);
         
         if (vectorInCameraBasis.Z <= DistanceToScreen)
             return new Vector3(float.NaN, float.NaN, 0);

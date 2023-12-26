@@ -9,7 +9,7 @@ public class Cube: Object
         Basis = new Basis(center, new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1));
         var delta = new[] { -sideLen / 2, sideLen / 2 };
         GlobalVertices = delta.SelectMany(n => delta.SelectMany(n1 => delta.Select(n2 => center + new Vector3(n, n1, n2)))).ToArray();
-        LocalVertices = GlobalVertices.Select(v => Basis.ToLocalCoords(v)).ToArray();
+        LocalVertices = GlobalVertices.Select(v => Basis.ToLocalBasis(v)).ToArray();
         
         Indexes = new[]
         {

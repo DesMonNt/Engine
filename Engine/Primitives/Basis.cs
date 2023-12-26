@@ -29,9 +29,9 @@ public class Basis
         ZAxis = zAxis;
     }
 
-    public Vector3 ToLocalCoords(Vector3 global) => LocalCoordsMatrix * (global - Center);
+    public Vector3 ToLocalBasis(Vector3 global) => LocalCoordsMatrix * (global - Center);
 
-    public Vector3 ToGlobalCoords(Vector3 local) => GlobalCoordsMatrix * local + Center;
+    public Vector3 ToGlobalBasis(Vector3 local) => GlobalCoordsMatrix * local + Center;
 
     public void Move(Vector3 v) => Center += v;
 
