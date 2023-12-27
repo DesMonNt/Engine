@@ -6,6 +6,7 @@ public class Vector3 : IEquatable<Vector3>
     public double Y { get; }
     public double Z { get; }
 
+    public static readonly Vector3 Zero = new Vector3(0, 0, 0);
     public Vector3(double x, double y, double z)
     {
         X = x;

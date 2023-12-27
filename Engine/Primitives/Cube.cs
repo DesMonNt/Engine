@@ -4,27 +4,55 @@ namespace Engine.Primitives;
 
 public class Cube: Object
 {
-    public Cube(Vector3 center, float sideLen)
+    public float BottomWidth { get; protected set; }
+    public float BottomHeight { get; protected set; }
+    public float Height { get; protected set; }
+    public Cube(Vector3 center, float bottomWidth, float bottomHeight, float height)
     {
         Basis = new Basis(center, new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1));
-        var delta = new[] { -sideLen / 2, sideLen / 2 };
-        GlobalVertices = delta.SelectMany(n => delta.SelectMany(n1 => delta.Select(n2 => center + new Vector3(n, n1, n2)))).ToArray();
-        LocalVertices = GlobalVertices.Select(v => Basis.ToLocalBasis(v)).ToArray();
+        BottomWidth = bottomWidth;
+        BottomHeight = bottomHeight;
+        Height = height;
         
-        Indexes = new[]
-        {
-            1,3,2 , 
-            1,0,2 , 
-            5,7,6 ,
-            5,4,6 ,
-            1,0,4 ,
-            1,5,4 ,
-            3,2,6 ,
-            3,7,6 ,
-            1,3,7 ,
-            1,5,7 ,
-            0,2,6 ,
-            0,4,6
-        };
+        InitializeVertices();
+        InitializeTriangles();
     }
+
+    private void InitializeVertices()
+    {
+        var bottomWidth = BottomWidth / 2.0f;
+        var bottomHeight = BottomHeight / 2.0f;
+        var height = Height / 2.0f;
+        
+        GlobalVertices = new[]
+        {
+            Basis.ToGlobalBasis(new Vector3(bottomWidth, height, bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(bottomWidth,-height, bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(-bottomWidth, height, bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(-bottomWidth, -height, bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(bottomWidth, height, -bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(bottomWidth, -height, -bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(-bottomWidth, height, -bottomHeight)),
+            Basis.ToGlobalBasis(new Vector3(-bottomWidth, -height, -bottomHeight)),
+        };
+
+        LocalVertices = GlobalVertices.Select(v => Basis.ToLocalBasis(v)).ToArray();
+    }
+    
+    private void InitializeTriangles() => Triangles = 
+        new []
+        {
+            new Triangle(0, 1, 2),
+            new Triangle(1, 3, 2),
+            new Triangle(4, 5, 6),
+            new Triangle(5, 7, 6),
+            new Triangle(0, 2, 4),
+            new Triangle(2, 6, 4),
+            new Triangle(1, 5, 3),
+            new Triangle(5, 7, 3),
+            new Triangle(0, 4, 1),
+            new Triangle(4, 5, 1),
+            new Triangle(2, 3, 6),
+            new Triangle(3, 7, 6)
+        };
 }
