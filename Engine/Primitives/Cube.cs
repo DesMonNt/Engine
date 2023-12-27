@@ -18,6 +18,8 @@ public class Cube: Object
         InitializeTriangles();
     }
 
+    public Cube(Vector3 center, float side) : this(center, side, side, side) { }
+
     private void InitializeVertices()
     {
         var bottomWidth = BottomWidth / 2.0f;

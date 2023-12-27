@@ -19,6 +19,6 @@ public class Screen
         Height = height;
     }
 
-    public bool IsOnScreen(Vector3 vector)
+    public bool IsOnScreen(Vector2 vector)
         => vector.X >= 0 && vector.X < Width && vector.Y >= 0 && vector.Y < Height;
 }

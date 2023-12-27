@@ -1,47 +1,49 @@
 ﻿using Engine.MathExtensions;
 using Engine.Primitives;
+using Object = Engine.Primitives.Object;
 
 namespace Engine.Render;
 
-public class Camera
+public class Camera: Object
 {
-    public Basis Basis { get;}
     public Screen Screen { get; }
-    public double DistanceToScreen { get;} 
+    public double ScreenDistance { get;} 
+    public double RenderDistance { get; }
     public double Fov { get;}
-    private double Scale => Screen.Width / (2 * DistanceToScreen * Math.Tan(Fov / 2));
+    private double FovScale => Screen.Width / (2 * ScreenDistance * Math.Tan(Fov / 2));
 
-    public Camera(Vector3 center, Screen screen, double distanceToScreen, double fov)
+    public Camera(Vector3 center, Screen screen, double screenDistance, double renderDistance, double fov)
     {
         Basis = new Basis(center, new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1));
         Screen = screen;
-        DistanceToScreen = distanceToScreen;
+        ScreenDistance = screenDistance;
+        RenderDistance = renderDistance;
         Fov = fov;
     }
     
-    public void Move(Vector3 vector) => Basis.Move(vector);
+    public new void Move(Vector3 vector) => Basis.Move(vector);
     
-    public void Rotate(float angle, Axis axis) => Basis.Rotate(angle, axis);
+    public new void Rotate(float angle, Axis axis) => Basis.Rotate(angle, axis);
     
-    public Vector3 ScreenProjection(Vector3 vector)
+    public Vector2? ScreenProjection(Vector3 vector)
     {
         var vectorInCameraBasis = Basis.ToLocalBasis(vector);
         
-        if (vectorInCameraBasis.Z <= DistanceToScreen)
-            return new Vector3(float.NaN, float.NaN, 0);
+        if (vectorInCameraBasis.Z <= ScreenDistance || vectorInCameraBasis.Z >= RenderDistance)
+            return null;
         
         var projection = GetProjection(vectorInCameraBasis);
-        var vectorInScreenBasis = new Vector3(projection.X + Screen.Width / 2, Screen.Height / 2 - projection.Y, 0);
+        var vectorInScreenBasis = new Vector2(projection.X + Screen.Width / 2, Screen.Height / 2 - projection.Y);
 
         return Screen.IsOnScreen(vectorInScreenBasis) 
             ? vectorInScreenBasis 
-            : new Vector3(float.NaN, float.NaN, 0);
+            : null;
     }
 
-    private Vector3 GetProjection(Vector3 vector)
+    private Vector2 GetProjection(Vector3 vector)
     {
-        var delta = DistanceToScreen / vector.Z * Scale;
-        var projectionOnScreen = new Vector3(vector.X, vector.Y, 0) * delta;
+        var delta = ScreenDistance / vector.Z * FovScale;
+        var projectionOnScreen = new Vector2(vector.X, vector.Y) * delta;
 
         return projectionOnScreen;
     }
