@@ -25,7 +25,7 @@ public class Camera: Object
     
     public new void Rotate(float angle, Axis axis) => Basis.Rotate(angle, axis);
     
-    public Vector2? ScreenProjection(Vector3 vector)
+    public Vector3? ScreenProjection(Vector3 vector)
     {
         var vectorInCameraBasis = Basis.ToLocalBasis(vector);
         
@@ -33,7 +33,7 @@ public class Camera: Object
             return null;
         
         var projection = GetProjection(vectorInCameraBasis);
-        var vectorInScreenBasis = new Vector2(projection.X + Screen.Width / 2, Screen.Height / 2 - projection.Y);
+        var vectorInScreenBasis = new Vector3(projection.X + Screen.Width / 2, Screen.Height / 2 - projection.Y, vectorInCameraBasis.Z);
 
         return Screen.IsOnScreen(vectorInScreenBasis) 
             ? vectorInScreenBasis 
