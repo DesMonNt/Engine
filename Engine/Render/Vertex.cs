@@ -2,7 +2,7 @@
 
 namespace Engine.Render; 
 
-public struct Vertex
+public class Vertex
 {
     public Vector3 Position { get; }
     public Vector2 TextureCoordinates { get; }

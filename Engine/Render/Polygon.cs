@@ -1,6 +1,4 @@
-﻿using Engine.MathExtensions;
-
-namespace Engine.Render;
+﻿namespace Engine.Render;
 
 public class Polygon
 {
