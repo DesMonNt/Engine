@@ -42,7 +42,7 @@ public class Camera: Object
 
     private Vector2 GetProjection(Vector3 vector)
     {
-        var delta = ScreenDistance / vector.Z * FovScale;
+        var delta = (float)(ScreenDistance / vector.Z * FovScale);
         var projectionOnScreen = new Vector2(vector.X, vector.Y) * delta;
 
         return projectionOnScreen;

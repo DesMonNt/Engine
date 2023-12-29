@@ -2,14 +2,14 @@
 
 public class Matrix3X3
 {
-    private readonly double[,] _data;
+    private readonly float[,] _data;
     
-    public double this[int row, int col]
+    public float this[int row, int col]
     {
         get => _data[row, col];
         set => _data[row, col] = value;
     }
-    public Matrix3X3(double[,] data)
+    public Matrix3X3(float[,] data)
     {
         if (data.GetLength(0) != 3 || data.GetLength(1) != 3)
             throw new ArgumentException();
@@ -18,9 +18,9 @@ public class Matrix3X3
     }
     
     public Matrix3X3(
-        double a11, double a12, double a13, 
-        double a21, double a22, double a23,
-        double a31, double a32, double a33)
+        float a11, float a12, float a13, 
+        float a21, float a22, float a23,
+        float a31, float a32, float a33)
     {
         _data = new[,]
         {
@@ -32,7 +32,7 @@ public class Matrix3X3
 
     public static Matrix3X3 operator +(Matrix3X3 left, Matrix3X3 right)
     {
-        var result = new double[3, 3];
+        var result = new float[3, 3];
 
         for (var i = 0; i < 3; i++)
         {
@@ -45,7 +45,7 @@ public class Matrix3X3
     
     public static Matrix3X3 operator -(Matrix3X3 matrix)
     {
-        var result = new double[3, 3];
+        var result = new float[3, 3];
 
         for (var i = 0; i < 3; i++)
         {
@@ -58,7 +58,7 @@ public class Matrix3X3
 
     public static Matrix3X3 operator *(Matrix3X3 left, Matrix3X3 right)
     {
-        var result = new double[3, 3];
+        var result = new float[3, 3];
 
         for (var i = 0; i < 3; i++)
         {
@@ -72,9 +72,9 @@ public class Matrix3X3
         return new Matrix3X3(result);
     }
     
-    public static Matrix3X3 operator *(Matrix3X3 left, double right)
+    public static Matrix3X3 operator *(Matrix3X3 left, float right)
     {
-        var result = new double[3, 3];
+        var result = new float[3, 3];
         
         for (var i = 0; i < 3; i++)
         {
@@ -85,9 +85,9 @@ public class Matrix3X3
         return new Matrix3X3(result);
     }
 
-    public static Matrix3X3 operator *(double left, Matrix3X3 right) => right * left;
+    public static Matrix3X3 operator *(float left, Matrix3X3 right) => right * left;
     
     public static Matrix3X3 operator -(Matrix3X3 left, Matrix3X3 right) => left + -right;
 
-    public double Determinant() => Matrix3X3Functions.Determinant(this);
+    public float Determinant() => Matrix3X3Functions.Determinant(this);
 }

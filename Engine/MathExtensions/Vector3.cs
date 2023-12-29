@@ -2,12 +2,12 @@
 
 public class Vector3 : IEquatable<Vector3>
 {
-    public double X { get; }
-    public double Y { get; }
-    public double Z { get; }
+    public float X { get; }
+    public float Y { get; }
+    public float Z { get; }
 
     public static readonly Vector3 Zero = new Vector3(0, 0, 0);
-    public Vector3(double x, double y, double z)
+    public Vector3(float x, float y, float z)
     {
         X = x;
         Y = y;
@@ -23,10 +23,10 @@ public class Vector3 : IEquatable<Vector3>
     public static Vector3 operator -(Vector3 left, Vector3 right)
         => left + -right;
 
-    public static Vector3 operator *(Vector3 left, double right)
+    public static Vector3 operator *(Vector3 left, float right)
         => new(left.X * right, left.Y * right, left.Z * right);
 
-    public static Vector3 operator *(double left, Vector3 right)
+    public static Vector3 operator *(float left, Vector3 right)
         => right * left;
 
     public static Vector3 operator *(Matrix3X3 left, Vector3 right)
@@ -38,7 +38,7 @@ public class Vector3 : IEquatable<Vector3>
         return new Vector3(x, y, z);
     }
     
-    public static Vector3 operator /(Vector3 left, double right)
+    public static Vector3 operator /(Vector3 left, float right)
         => new(left.X / right, left.Y / right, left.Z / right);
 
     public bool Equals(Vector3 other)
@@ -47,9 +47,9 @@ public class Vector3 : IEquatable<Vector3>
     public override bool Equals(object? obj)
         => obj is Vector3 other && Equals(other);
 
-    public double Length() => Vector3Functions.Length(this);
+    public float Length() => Vector3Functions.Length(this);
 
     public Vector3 Normalize() => Vector3Functions.Normalize(this);
 
-    public Vector3 Rotate(double angle, Axis axis) => Vector3Functions.Rotate(this, angle, axis);
+    public Vector3 Rotate(float angle, Axis axis) => Vector3Functions.Rotate(this, angle, axis);
 }

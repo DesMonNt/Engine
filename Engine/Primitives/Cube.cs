@@ -16,6 +16,9 @@ public class Cube: Object
         
         InitializeVertices();
         InitializeTriangles();
+
+        foreach (var triangle in Triangles)
+            CalculateNormal(triangle);
     }
 
     public Cube(Vector3 center, float side) : this(center, side, side, side) { }

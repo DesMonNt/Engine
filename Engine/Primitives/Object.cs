@@ -15,6 +15,9 @@ public abstract class Object
 
         for (var i = 0; i < LocalVertices.Length; i++)
             GlobalVertices[i] += v;
+        
+        foreach (var triangle in Triangles)
+            CalculateNormal(triangle);
     }
 
     public void Rotate(float angle, Axis axis)
@@ -23,6 +26,9 @@ public abstract class Object
 
         for (var i = 0; i < LocalVertices.Length; i++)
             GlobalVertices[i] = Basis.ToGlobalBasis(LocalVertices[i]);
+
+        foreach (var triangle in Triangles)
+            CalculateNormal(triangle);
     }
 
     public void Scale(float k)
@@ -32,5 +38,22 @@ public abstract class Object
 
         for (var i = 0; i < LocalVertices.Length; i++)
             GlobalVertices[i] = Basis.ToGlobalBasis(LocalVertices[i]);
+        
+        foreach (var triangle in Triangles)
+            CalculateNormal(triangle);
+    }
+
+    protected void CalculateNormal(Triangle triangle)
+    {
+        var v1 = GlobalVertices[triangle.VerticesIndexes[0]];
+        var v2 = GlobalVertices[triangle.VerticesIndexes[1]];
+        var v3 = GlobalVertices[triangle.VerticesIndexes[2]];
+        
+        var normal = Vector3Functions.Cross(v2 - v1, v3 - v1);
+        
+        if (Vector3Functions.Dot(v1 - Basis.Center, normal) < 0)
+            normal = -normal;
+
+        triangle.Normal = normal.Normalize();
     }
 }

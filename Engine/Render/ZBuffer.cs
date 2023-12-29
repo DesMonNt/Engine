@@ -4,21 +4,22 @@ namespace Engine.Render;
 
 public class ZBuffer
 {
-    public Vector3[,] Buffer { get; private set; }
-    public uint Width { get; }
-    public uint Height { get; }
+    private Screen Screen { get; set; }
+    private Vector3[,] Buffer { get; set; }
 
-    public ZBuffer(uint width, uint height)
+    public ZBuffer(Screen screen)
     {
-        Width = width;
-        Height = height;
-        Buffer = new Vector3[Width, Height];
+        Screen = screen;
+        Buffer = new Vector3[Screen.Width, Screen.Height];
     }
 
-    public void Add(Vector3 vector, Vector2 projection)
+    public void Add(Vector3 vector)
     {
-        var x = (int)Math.Round(projection.X);
-        var y = (int)Math.Round(projection.Y);
+        var x = (int)vector.X;
+        var y = (int)vector.Y;
+        
+        if(!Screen.IsOnScreen(vector))
+            return;
         
         if (Buffer[x, y] is null)
             Buffer[x, y] = vector;
@@ -28,6 +29,11 @@ public class ZBuffer
 
         Buffer[x, y] = vector;
     }
-    
-    public void Clear() => Buffer = new Vector3[Width, Height];
+
+    public Vector3? Get(int x, int y) 
+        => !Screen.IsOnScreen(new Vector3(x, y, 0)) 
+            ? null 
+            : Buffer[x, y];
+
+    public void Clear() => Buffer = new Vector3[Screen.Width, Screen.Height];
 }

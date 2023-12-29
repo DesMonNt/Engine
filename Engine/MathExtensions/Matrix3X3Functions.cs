@@ -2,7 +2,7 @@
 
 public class Matrix3X3Functions
 {
-    public static double Determinant(Matrix3X3 matrix)
+    public static float Determinant(Matrix3X3 matrix)
         => matrix[0, 0] * (matrix[1, 1] * matrix[2, 2] - matrix[2, 1] * matrix[1, 2])
                - matrix[0, 1] * (matrix[1, 0] * matrix[2, 2] - matrix[2, 0] * matrix[1, 2])
                + matrix[0, 2] * (matrix[1, 0] * matrix[2, 1] - matrix[2, 0] * matrix[1, 1]);
@@ -14,7 +14,7 @@ public class Matrix3X3Functions
         if (determinant == 0)
             return null;
 
-        var result = new double[3, 3];
+        var result = new float[3, 3];
 
         for (var i = 0; i < 3; i++)
         {
@@ -29,9 +29,9 @@ public class Matrix3X3Functions
         return new Matrix3X3(result);
     }
     
-    public static double Minor(Matrix3X3 matrix, int row, int col)
+    public static float Minor(Matrix3X3 matrix, int row, int col)
     {
-        var minor = new double[2, 2];
+        var minor = new float[2, 2];
         var minorRow = 0; 
         var minorCol = 0;
 
