@@ -5,22 +5,19 @@ namespace Engine.Render;
 public class FrameBuffer
 {
     public Color[,] Buffer { get; private set; }
-
-    public int Width { get; }
-    public int Height { get; }
+    private Screen Screen { get; set; }
 
     public FrameBuffer(Screen screen)
     {
-        Width = (int)screen.Width;
-        Height = (int)screen.Height;
-        Buffer = new Color[Width, Height];
+        Screen = screen;
+        Buffer = new Color[Screen.Width, Screen.Height];
     }
 
     public void SetPixel(int x, int y, Color color)
     {
-        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        if (x >= 0 && x < Screen.Width && y >= 0 && y < Screen.Height)
             Buffer[x, y] = color;
     }
 
-    public void Clear() => Buffer = new Color[Width, Height];
+    public void Clear() => Buffer = new Color[Screen.Width, Screen.Height];
 }

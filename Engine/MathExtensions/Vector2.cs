@@ -2,12 +2,12 @@
 
 public class Vector2 : IEquatable<Vector2>
 {
-    public double X { get; }
-    public double Y { get; }
+    public float X { get; }
+    public float Y { get; }
     
     public static readonly Vector2 Zero = new Vector2(0, 0);
 
-    public Vector2(double x, double y)
+    public Vector2(float x, float y)
     {
         X = x;
         Y = y;
@@ -22,13 +22,13 @@ public class Vector2 : IEquatable<Vector2>
     public static Vector2 operator -(Vector2 left, Vector2 right)
         => left + -right;
 
-    public static Vector2 operator *(Vector2 left, double right)
+    public static Vector2 operator *(Vector2 left, float right)
         => new(left.X * right, left.Y * right);
 
-    public static Vector2 operator *(double left, Vector2 right)
+    public static Vector2 operator *(float left, Vector2 right)
         => right * left;
 
-    public static Vector2 operator /(Vector2 left, double right)
+    public static Vector2 operator /(Vector2 left, float right)
         => new(left.X / right, left.Y / right);
 
     public bool Equals(Vector2 other)

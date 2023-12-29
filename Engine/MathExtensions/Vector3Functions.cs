@@ -6,8 +6,8 @@ public enum Axis
 }
 public static class Vector3Functions
 {
-    public static double Length(Vector3 vector)
-        => Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
+    public static float Length(Vector3 vector)
+        => (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
     
     public static Vector3 Normalize(Vector3 vector)
     {
@@ -17,13 +17,13 @@ public static class Vector3Functions
             ? new Vector3(0, 0, 0)
             : new Vector3(vector.X / len, vector.Y / len, vector.Z / len);
     }
-    public static double Dot(Vector3 a, Vector3 b)
+    public static float Dot(Vector3 a, Vector3 b)
         => a.X * b.X + a.Y * b.Y + a.Z * b.Z;
     
     public static Vector3 Cross(Vector3 a, Vector3 b)
         => new(a.Y * b.Z - b.Y * a.Z, a.Z * b.X - b.Z * a.X, a.X * b.Y - b.X * a.Y);
     
-    public static double TripleProduct(Vector3 a, Vector3 b, Vector3 c)
+    public static float TripleProduct(Vector3 a, Vector3 b, Vector3 c)
         => Dot(a, Cross(b, c));
     
     public static Vector3 ProjectOnto(Vector3 vector, Vector3 ontoVector)
@@ -33,17 +33,17 @@ public static class Vector3Functions
         return Normalize(ontoVector) * projection;
     }
     
-    public static double DistanceTo(Vector3 a, Vector3 b)
+    public static float DistanceTo(Vector3 a, Vector3 b)
     {
         var dx = a.X - b.X;
         var dy = a.Y - b.Y;
         var dz = a.Z - b.Z;
 
-        return Math.Sqrt(dx * dx + dy * dy + dz * dz);
+        return (float)Math.Sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    public static double Angle(Vector3 a, Vector3 b)
-        => Math.Acos(Dot(a, b) / (Length(a) * Length(b)));
+    public static float Angle(Vector3 a, Vector3 b)
+        => (float)Math.Acos(Dot(a, b) / (Length(a) * Length(b)));
     
     public static Vector3 Reflect(Vector3 a, Vector3 b)
     {
@@ -53,10 +53,10 @@ public static class Vector3Functions
         return reflection;
     }
 
-    public static Vector3 Rotate(Vector3 vector, double angle, Axis axis)
+    public static Vector3 Rotate(Vector3 vector, float angle, Axis axis)
     {
-        var cosTheta = Math.Cos(angle);
-        var sinTheta = Math.Sin(angle);
+        var cosTheta = (float)Math.Cos(angle);
+        var sinTheta = (float)Math.Sin(angle);
 
         var rotationMatrix = axis switch
         {
