@@ -1,4 +1,5 @@
-﻿using Engine.MathExtensions;
+﻿using System.Drawing;
+using Engine.MathExtensions;
 
 namespace Engine.Primitives
 {
@@ -8,12 +9,13 @@ namespace Engine.Primitives
         public float BottomHeight { get; protected set; }
         public float Height { get; protected set; }
 
-        public Pyramid(Vector3 center, float bottomWidth, float bottomHeight, float height)
+        public Pyramid(Vector3 center, float bottomWidth, float bottomHeight, float height, Color color)
         {
             Basis = new Basis(center, new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1));
             BottomWidth = bottomWidth;
             BottomHeight = bottomHeight;
             Height = height;
+            Color = color;
             
             InitializeVertices();
             InitializeTriangles();

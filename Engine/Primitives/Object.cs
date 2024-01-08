@@ -1,4 +1,5 @@
-﻿using Engine.MathExtensions;
+﻿using System.Drawing;
+using Engine.MathExtensions;
 
 namespace Engine.Primitives;
 
@@ -8,6 +9,7 @@ public abstract class Object
     public Vector3[] LocalVertices { get; protected set; }
     public Vector3[] GlobalVertices { get; protected set; }
     public Triangle[] Triangles { get; protected set; }
+    public Color Color { get; protected set; }
 
     public void Move(Vector3 v)
     {
