@@ -23,11 +23,11 @@ public class Rasterizer
         if (!isShowPolygonEdges)
             return;
         
-        var c = Color.Gray;
+        var lineColor = Color.Gray;
         
-        RasterizeLine(p1, p2, c);
-        RasterizeLine(p2, p3, c);
-        RasterizeLine(p3, p1, c);
+        RasterizeLine(p1, p2, lineColor);
+        RasterizeLine(p2, p3, lineColor);
+        RasterizeLine(p3, p1, lineColor);
     }
 
     private void RasterizeLine(Vector3 p1 , Vector3 p2, Color color)
@@ -44,7 +44,7 @@ public class Rasterizer
 
         while (x1 != x2 || y1 != y2)
         { 
-            var z1 = InterpolateZ(p1, p2, new Vector2(x1, y1));
+            var z1 = InterpolateZ(p1, p2, new Vector2(x1, y1)) - 1;
             var pixel = new Vector3(x1, y1, z1);
             
             FillPixel(pixel, color);
@@ -73,9 +73,9 @@ public class Rasterizer
         var bottomY = (int)bottomLeft.Y;
         var topY = (int)topRight.Y;
         
-        for (var x = leftX; x < rightX; x++)
+        for (var x = leftX; x <= rightX; x++)
         {
-            for (var y = bottomY; y < topY; y++)
+            for (var y = bottomY; y <= topY; y++)
             {
                 var point = new Vector2(x, y);
 
@@ -84,7 +84,7 @@ public class Rasterizer
                 
                 var z = InterpolateZ(p1, p2, p3, point);
                 var pixel = new Vector3(x, y, z);
-            
+                
                 FillPixel(pixel, color);
             }
         }
@@ -106,8 +106,8 @@ public class Rasterizer
         var beta = LineEquation(p2, p3, point);
         var gamma = LineEquation(p3, p1, point);
 
-        return (alpha < 0 && beta < 0 && gamma < 0)
-            || (alpha > 0 && beta > 0 && gamma > 0);
+        return (alpha <= 0 && beta <= 0 && gamma <= 0)
+            || (alpha >= 0 && beta >= 0 && gamma >= 0);
     }
 
     private static double LineEquation(Vector3 p1, Vector3 p2, Vector2 point)
@@ -147,6 +147,7 @@ public class Rasterizer
         
         return z;
     }
+    
     private void FillPixel(Vector3 vector, Color color)
     {
         var (x, y) = RoundCoordinates(vector);

@@ -35,27 +35,25 @@ public class Scene
     {
         var triangles = obj.Triangles;
         var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
-
-        var c = obj is Cube ? Color.Red : Color.Green;
-            
         
         Parallel.ForEach(triangles, parallelOptions, triangle =>
         {
             var v1 = obj.GlobalVertices[triangle.VerticesIndexes[0]];
             var v2 = obj.GlobalVertices[triangle.VerticesIndexes[1]];
             var v3 = obj.GlobalVertices[triangle.VerticesIndexes[2]];
-
+        
             if (!IsVisible(v1, triangle.Normal))
                 return;
-
+        
             var p1 = Camera.ScreenProjection(v1);
             var p2 = Camera.ScreenProjection(v2);
             var p3 = Camera.ScreenProjection(v3);
-
+        
             if (p1 is null || p2 is null || p3 is null)
                 return;
+
             
-            _rasterizer.ComputePolygon(p1, p2, p3, c, isShowPolygonEdges);
+            _rasterizer.ComputePolygon(p1, p2, p3, obj.Color, isShowPolygonEdges);
         });
     }
 

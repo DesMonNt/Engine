@@ -1,4 +1,5 @@
-﻿using Engine.MathExtensions;
+﻿using System.Drawing;
+using Engine.MathExtensions;
 
 namespace Engine.Primitives;
 
@@ -7,12 +8,13 @@ public class Cube: Object
     public float BottomWidth { get; protected set; }
     public float BottomHeight { get; protected set; }
     public float Height { get; protected set; }
-    public Cube(Vector3 center, float bottomWidth, float bottomHeight, float height)
+    public Cube(Vector3 center, float bottomWidth, float bottomHeight, float height, Color color)
     {
         Basis = new Basis(center, new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1));
         BottomWidth = bottomWidth;
         BottomHeight = bottomHeight;
         Height = height;
+        Color = color;
         
         InitializeVertices();
         InitializeTriangles();
@@ -21,7 +23,7 @@ public class Cube: Object
             CalculateNormal(triangle);
     }
 
-    public Cube(Vector3 center, float side) : this(center, side, side, side) { }
+    public Cube(Vector3 center, float side, Color color) : this(center, side, side, side, color) { }
 
     private void InitializeVertices()
     {
