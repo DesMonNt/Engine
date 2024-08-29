@@ -1,4 +1,4 @@
-# 2E Render Engine
+# Render Engine
 
 It is a simple engine for rendering 3D objects on the CPU. At the moment it is under development. All classes in the engine are written using basic C# language features. No other libraries are used
 
